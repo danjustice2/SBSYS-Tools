@@ -17,13 +17,6 @@ if ($process -eq $null) {
     Start-Process $exePath -ArgumentList $parameters
 } else {
     # Process is already running, show a popup message with options
-    $result = [System.Windows.Forms.MessageBox]::Show("SBSYS kører allerede. Vil du afslutte programmet og starte den igen?", "Advarsel", [System.Windows.Forms.MessageBoxButtons]::YesNo, [System.Windows.Forms.MessageBoxIcon]::Warning)
+    $result = [System.Windows.Forms.MessageBox]::Show("SBSYS kører allerede.", "Advarsel", [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Warning)
     
-    if ($result -eq [System.Windows.Forms.DialogResult]::Yes) {
-        # User chose to end the process and start it again
-        Stop-Process -Name $processName -Force
-        Start-Process $exePath -ArgumentList $parameters
-    } else {
-        # User chose not to end the process
-    }
 }
