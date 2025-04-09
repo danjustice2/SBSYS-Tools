@@ -1,3 +1,5 @@
+# Available on Github at: https://github.com/danjustice2/SBSYS-only-one-instance
+
 # Load Windows Forms assembly
 Add-Type -AssemblyName System.Windows.Forms
 
@@ -17,7 +19,7 @@ if ($process -eq $null) {
     Start-Process $exePath -ArgumentList $parameters
 } else {
     # Process is already running, show a popup message with options
-    $result = [System.Windows.Forms.MessageBox]::Show("SBSYS kører allerede. Vil du afslutte programmet og starte den igen?", "Advarsel", [System.Windows.Forms.MessageBoxButtons]::YesNo, [System.Windows.Forms.MessageBoxIcon]::Warning)
+    $result = [System.Windows.Forms.MessageBox]::Show("SBSYS kÃ¸rer allerede. Vil du afslutte programmet og starte den igen?", "Advarsel", [System.Windows.Forms.MessageBoxButtons]::YesNo, [System.Windows.Forms.MessageBoxIcon]::Warning)
     
     if ($result -eq [System.Windows.Forms.DialogResult]::Yes) {
         # User chose to end the process and start it again
