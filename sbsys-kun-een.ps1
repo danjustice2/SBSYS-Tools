@@ -52,10 +52,22 @@ $processes = Get-Process -Name $processName -ErrorAction SilentlyContinue
 if ($null -eq $processes) {
     # Process is not running, start the executable with parameters
     Start-Process $exePath -ArgumentList $parameters
-} elseif ($processes.Count -gt 1) {
+
+    # Check if an additional script path is provided as an input parameter
+    if ($args.Count -gt 0) {
+        $additionalScriptPath = $args[0]
+
+        # Validate if the provided script path exists
+        if (Test-Path $additionalScriptPath) {
+            # Run the additional script as a hidden background process
+            Start-Process -FilePath "powershell.exe" -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$additionalScriptPath`"" -WindowStyle Hidden
+        }
+        }
+    }
+elseif ($processes.Count -gt 1) {
     # Multiple instances detected, show a popup message
     [System.Windows.Forms.MessageBox]::Show("Du har allerede mere end én SBSYS-instans kørende. Du anbefales kun at have én kopi af SBSYS kørende ad gangen for at undgå datatab.", "Advarsel", [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Error)
 } else {
     # Single instance detected, show a popup message
-    [System.Windows.Forms.MessageBox]::Show("SBSYS kører allerede.", "Advarsel", [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Warning)
+    [System.Windows.Forms.MessageBox]::Show("SBSYS kører allerede. Hvis du ikke kan finde SBSYS-vinduet bedes du genstarte din computer og prøve igen.", "Advarsel", [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Warning)
 }
