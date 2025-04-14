@@ -53,17 +53,18 @@ function BackupFile($filePath) {
             # Extract file details
             $baseName = [System.IO.Path]::GetFileNameWithoutExtension($filePath)
             $extension = [System.IO.Path]::GetExtension($filePath)
-
-            # Prepare date/time subfolders
+            # Prepare date/time subfolders in Danish
             $now = Get-Date
-            $month = $now.ToString("MM")
+            $monthNames = @("januar", "februar", "marts", "april", "maj", "juni", "juli", "august", "september", "oktober", "november", "december")
+            $month = $monthNames[$now.Month - 1]
             $day = $now.ToString("dd")
+            $dayWithMonth = "$day. $month"
             $hour = $now.ToString("HH")
             $minute = $now.ToString("mm")
             $second = $now.ToString("ss")
 
             # Build the backup directory path
-            $backupDir = Join-Path $backupRoot "$month\$day\$hour\$baseName"
+            $backupDir = Join-Path $backupRoot "$month\$dayWithMonth\kl. $hour\$baseName"
 
             # Create the directory if it doesn't exist
             if (!(Test-Path $backupDir)) {
@@ -110,6 +111,29 @@ $watcher.EnableRaisingEvents = $true
 
 # Log startup message
 LogMessage "Backup watcher started. Monitoring folder: $sourceFolder"
+
+# Determine the desktop path dynamically
+$desktopPath = [Environment]::GetFolderPath("Desktop")
+
+# Define the shortcut path and target folder
+$shortcutPath = Join-Path $desktopPath "SBSYS Kladde Backup.lnk"
+$targetFolder = "C:\Users\$env:USERNAME\AppData\Roaming\Dokumenter\SbsysNetDrift\Kladde\$env:USERNAME.backup"
+
+# Check if the shortcut already exists
+if (!(Test-Path $shortcutPath)) {
+    # Create the shortcut
+    $wshShell = New-Object -ComObject WScript.Shell
+    $shortcut = $wshShell.CreateShortcut($shortcutPath)
+    $shortcut.TargetPath = $targetFolder
+    $shortcut.WorkingDirectory = $targetFolder
+    $shortcut.WindowStyle = 1
+    $shortcut.IconLocation = "shell32.dll, 3"  # Default folder icon
+    $shortcut.Save()
+
+    LogMessage "Shortcut created on desktop: $shortcutPath"
+} else {
+    LogMessage "Shortcut already exists on desktop: $shortcutPath"
+}
 
 # Keep the script running
 Write-Host "Backup watcher started. Press Ctrl+C to stop."
