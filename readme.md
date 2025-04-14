@@ -1,4 +1,4 @@
-# SBSYS Kun Én Instans
+# SBSYS Tools
 
 Dette repository indeholder PowerShell-scripts designet til at administrere og overvåge SBSYS-applikationen, så kun én instans af applikationen kører ad gangen, samt til at levere backup-funktionalitet til kladder.
 
