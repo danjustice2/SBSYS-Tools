@@ -3,16 +3,33 @@
 # Load Windows Forms assembly
 Add-Type -AssemblyName System.Windows.Forms
 
-# Define the path to the executable and parameters
+# ============================
+# CONFIGURATION SECTION
+# ============================
+
+# Path to the executable that launches the SBSYS application
 $exePath = "C:\Windows\System32\wscript.exe"
+
+# Parameters to pass to the executable
+# Update the paths below to match your SBSYS environment
 $parameters = '"C:\Program Files\SBSYS\SBSYS.vbs" "\\srafil01v\prog\SBSYS\SBSYSstarter\SBSYS.INI" "SbSysDrift"'
+
+# Path to the SBSYS application executable
 $sbsysExePath = "C:\Program Files\SBSYS\SbSysDrift\Sbsys.Windows.Client.exe"
 
-# Get the process name from the executable path
-$processName = [System.IO.Path]::GetFileNameWithoutExtension($sbsysExePath)
-
-# Define a path to store the timestamp of the last run
+# Path to store the timestamp of the last run
+# You can change this if needed, but the default is the Temp folder
 $timestampFile = "$env:Temp\SBSYS_LastRun.txt"
+
+# Time interval (in seconds) to prevent the script from running multiple times in quick succession
+$minimumIntervalSeconds = 5
+
+# ============================
+# SCRIPT LOGIC
+# ============================
+
+# Get the process name from the SBSYS executable path
+$processName = [System.IO.Path]::GetFileNameWithoutExtension($sbsysExePath)
 
 # Check if the timestamp file exists and read the last run time
 if (Test-Path $timestampFile) {
@@ -20,8 +37,8 @@ if (Test-Path $timestampFile) {
     $lastRunTime = [datetime]$lastRunTimeString
     $currentTime = Get-Date
 
-    # If the script was run less than 5 seconds ago, exit
-    if (($currentTime - $lastRunTime).TotalSeconds -lt 5) {
+    # If the script was run less than the minimum interval ago, exit
+    if (($currentTime - $lastRunTime).TotalSeconds -lt $minimumIntervalSeconds) {
         return
     }
 }
