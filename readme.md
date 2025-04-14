@@ -15,6 +15,11 @@ Dette repository indeholder PowerShell-scripts designet til at administrere og o
 - Opretter automatisk tidsstemplede backups af ændrede eller nyoprettede filer.
 - Logger alle aktiviteter i en logfil til revisionsformål.
 - Stopper overvågning, hvis SBSYS-applikationen ikke kører.
+- Tilføjer en genvej til backup-mappen på brugerens skrivebord for nem adgang.
+
+### 3. `daily_cleanup.ps1`
+- Fjerner automatisk gamle filer (ældre end 7 dage) fra backup-mappen.
+- Rydder op i tomme mapper for at holde backup-strukturen ren og organiseret.
 
 ## Brug
 
@@ -36,6 +41,14 @@ Dette repository indeholder PowerShell-scripts designet til at administrere og o
 3. Kør scriptet:
    ```powershell
    .\backup_watcher.ps1
+   ```
+
+### Kørsel af `daily_cleanup.ps1`
+1. Åbn PowerShell.
+2. Naviger til mappen, der indeholder scriptet.
+3. Kør scriptet:
+   ```powershell
+   .\daily_cleanup.ps1
    ```
 
 ## Konfiguration
