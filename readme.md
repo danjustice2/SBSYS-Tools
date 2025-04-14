@@ -32,8 +32,9 @@ Dette repository indeholder PowerShell-scripts designet til at administrere og o
    ```
 4. Angiv eventuelt en ekstra scriptsti som et argument:
    ```powershell
-   .\sbsys-kun-een.ps1 "sti\til\ekstra\script.ps1"
+   .\sbsys-kun-een.ps1 "sti\til\backup_watcher.ps1"
    ```
+   Meningen ved at man kan køre et ekstra script er, at man kan starte backup_watcher sammen med SBSYS. Backup_watcher overvåger løbende, om SBSYS kører og afslutter sig selv hvis den ikke gør.
 
 ### Kørsel af `backup_watcher.ps1`
 1. Åbn PowerShell.
