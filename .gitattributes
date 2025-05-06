@@ -1,1 +1,1 @@
-*.ps1 text working-tree-encoding=ISO-8859-1
+*.ps1 text eol=lf working-tree-encoding=UTF-8-BOM
