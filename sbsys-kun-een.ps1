@@ -1,4 +1,4 @@
-# Available on Github at: https://github.com/danjustice2/SBSYS-only-one-instance
+# Available on Github at: https://github.com/danjustice2/SBSYS-Tools
 
 # Load Windows Forms assembly
 Add-Type -AssemblyName System.Windows.Forms
@@ -66,8 +66,8 @@ if ($null -eq $processes) {
     }
 elseif ($processes.Count -gt 1) {
     # Multiple instances detected, show a popup message
-    [System.Windows.Forms.MessageBox]::Show("Du har allerede mere end én SBSYS-instans kørende. Du anbefales kun at have én kopi af SBSYS kørende ad gangen for at undgå datatab.", "Advarsel", [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Error)
+    [System.Windows.Forms.MessageBox]::Show("Du har allerede mere end Ã©n SBSYS-instans kÃ¸rende. Du anbefales kun at have Ã©n kopi af SBSYS kÃ¸rende ad gangen for at undgÃ¥ datatab.", "Advarsel", [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Error)
 } else {
     # Single instance detected, show a popup message
-    [System.Windows.Forms.MessageBox]::Show("SBSYS kører allerede. Hvis du ikke kan finde SBSYS-vinduet bedes du genstarte din computer og prøve igen.", "Advarsel", [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Warning)
+    [System.Windows.Forms.MessageBox]::Show("SBSYS kÃ¸rer allerede. Hvis du ikke kan finde SBSYS-vinduet bedes du genstarte din computer og prÃ¸ve igen.", "Advarsel", [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Warning)
 }
