@@ -1,4 +1,4 @@
-$backupRoot = "C:\Users\$env:USERNAME\AppData\Roaming\Dokumenter\SbsysNetDrift\Kladde\$env:USERNAME.backup"
+﻿$backupRoot = "C:\Users\$env:USERNAME\AppData\Roaming\Dokumenter\SbsysNetDrift\Kladde\$env:USERNAME.backup"
 $cutoffDate = (Get-Date).AddDays(-7)
 
 # Remove old files
