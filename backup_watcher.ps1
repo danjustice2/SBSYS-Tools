@@ -1,4 +1,4 @@
-﻿# backup_watcher.ps1
+# backup_watcher.ps1
 
 # Define the source folder to monitor
 $sourceFolder = "C:\Users\$env:USERNAME\AppData\Roaming\Dokumenter\SbsysNetDrift\Kladde\$env:USERNAME"

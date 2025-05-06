@@ -1,4 +1,4 @@
-﻿# Available on Github at: https://github.com/danjustice2/SBSYS-Tools
+# Available on Github at: https://github.com/danjustice2/SBSYS-Tools
 
 # Load Windows Forms assembly
 Add-Type -AssemblyName System.Windows.Forms
